@@ -1,11 +1,11 @@
-FROM python: latest
+FROM python:3.12.3
 
-WORKDIR /code
+WORKDIR /var/www
 
-COPY /sql_app/requirements.txt .
+COPY ./requirements.txt .
 
 RUN pip install -r requirements.txt
 
-COPY sql_app 
+COPY . .
 
-CMD ["fastapi" , "run" , "main.py" , "--port" , "80"]  
+CMD ["fastapi" , "run" , "main.py"]  

@@ -1,7 +1,7 @@
 from fastapi import FastAPI,Depends,HTTPException
 from sqlalchemy.orm import Session
-import kiya.crud as crud, kiya.models as models, kiya.schemas as schemas
-from kiya.database import SessionLocal, engine
+import crud, models, schemas
+from database import SessionLocal, engine
 import sys
 from pathlib import Path
 
@@ -52,7 +52,7 @@ async def update_student(STID: int, student: schemas.Student, db: Session = Depe
 def delet_student(STID: int, db: Session = Depends(get_db)):
     db_student = crud.get_student(db, id=STID)
     if db_student is None:
-        raise HTTPException(status_code=404, detail="Student not found")
+        raise HTTPException(status_code=400, detail="Student not found")
     return crud.delete_student(db = db , id = STID)
 
 
@@ -91,7 +91,7 @@ async def update_teacher(LID: int, teacher: schemas.Teacher, db: Session = Depen
 def delet_teacher(LID: int, db: Session = Depends(get_db)):
     db_teacher = crud.get_teacher(db, id=LID)
     if db_teacher is None:
-        raise HTTPException(status_code=404, detail="Teacher not found")
+        raise HTTPException(status_code=400, detail="Teacher not found")
     return crud.delete_teacher(db = db , id = LID)
 
 
@@ -132,5 +132,5 @@ async def update_dars(CID: int, dars: schemas.Dars, db: Session = Depends(get_db
 def delet_dars(CID: int, db: Session = Depends(get_db)):
     db_dars = crud.get_dars(db, id=CID)
     if db_dars is None:
-        raise HTTPException(status_code=404, detail="Dars not found")
+        raise HTTPException(status_code=400, detail="Dars not found")
     return crud.delete_dars(db = db , id = CID)

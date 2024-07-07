@@ -1,6 +1,6 @@
 from sqlalchemy import  Column, Integer, String , ForeignKey
 from sqlalchemy.orm import relationship
-from kiya.database import Base
+from database import Base
 import sys
 from pathlib import Path
 

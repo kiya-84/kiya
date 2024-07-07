@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 import sys
 from pathlib import Path
-import kiya.models as models,kiya.schemas as schemas
+import models,schemas
                   
 
 #STUDENT
@@ -109,7 +109,7 @@ def get_dars_list(db:Session , skip:int = 0 , limit:int = 100):
     return db.query(models.Dars).offset(skip).limit(limit).all()
 
 def create_dars(db: Session, dars: schemas.Dars):
-    db_dars = models.Dars(CID= dars.CID , CName = dars.CName , Department = dars.Department , credit = dars.credit)
+    db_dars = models.Dars(CID= dars.CID , CName = dars.CName , Department = dars.Department , Credit = dars.Credit)
     db.add(db_dars)
     db.commit()
     db.refresh(db_dars)
@@ -129,7 +129,7 @@ def update_dars(db: Session, id :int , dars : schemas.Dars):
     if db_dars:
         db_dars.CName = dars.CName
         db_dars.Department= dars.Department
-        db_dars.credit = dars.credit
+        db_dars.Credit = dars.Credit
         db.commit()
         db.refresh(db_dars)
         return {"message" : f"the dars {db_dars.CID} updated."}
