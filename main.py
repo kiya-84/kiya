@@ -134,3 +134,5 @@ def delet_dars(CID: int, db: Session = Depends(get_db)):
     if db_dars is None:
         raise HTTPException(status_code=400, detail="Dars not found")
     return crud.delete_dars(db = db , id = CID)
+
+#Dars is submitted
